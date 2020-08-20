@@ -25,6 +25,34 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
+/* socket io Connection */
+
+var socketio = require('socket.io');
+
+var io = socketio(server);
+
+io.on('connection', socket => {
+  console.log('a user connected', socket.id);
+
+  socket.on('chats', function (data) {
+    socket.broadcast.emit('chat', data);
+  });
+
+  socket.on('typing from front', function (name) {
+    socket.broadcast.emit('typing from back', name)
+  })
+
+  socket.on('delete chat backend', function (id) {
+    socket.broadcast.emit('delete-chat-frontend', id);
+  })
+
+  socket.on('stop typing from front', function () {
+    socket.broadcast.emit('stop typing from back');
+  })
+
+})
+
+
 server.listen(port);
 server.on('error', onError);
 server.on('listening', onListening);

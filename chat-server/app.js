@@ -3,7 +3,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var cors = require('cors')
+const cors = require('cors')
 
 const mongoose = require('mongoose');
 
@@ -32,6 +32,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors())
 
 app.use('/', indexRouter);
-app.use('/api/chats', chatRouter);
+app.use('/api/chat', chatRouter);
 
 module.exports = app;

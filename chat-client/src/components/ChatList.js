@@ -4,7 +4,12 @@ import ChatItem from './ChatItem'
 
 function ChatList(props) {
 
-    const ChatList = props.messages.map((message, index) => <ChatItem key={index} delete={props.delete} message={message} index={index} resend={props.resend} />)
+    const ChatList = props.messages.map((message, index) => <ChatItem 
+    key={index} 
+    delete={props.delete} 
+    message={message} 
+    index={index} 
+    resend={props.resend} />)
 
     return (
         <div>
